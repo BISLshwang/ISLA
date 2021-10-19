@@ -70,7 +70,7 @@ def clustering_and_survival_analysis():
 
         kmf = KaplanMeierFitter()
         fig, ax = plt.subplots(figsize=(5, 5))
-        color = ['green', 'red', 'purple', 'orange', 'blue']
+        color = ['#1B9064', '#CE4A09', '#6159A4', '#DE0077', '#DE9C08']
         lw = 2
 
         for i in set(cluster_list):
