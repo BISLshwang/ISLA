@@ -21,8 +21,9 @@ def training_autoencoders():
         df_metabric_renormed = df_metabric_renormed.set_index("sample")
         df_metabric_renormed = df_metabric_renormed.sort_index(axis=1, ascending=True)
         train_features = list(df_metabric_renormed.values)
+        train_samples = list(df_metabric_renormed.index)
 
-        return np.array(train_features)
+        return np.array(train_features), train_samples
 
 
     def make_test_features(df_tcga_renormed):
@@ -34,8 +35,9 @@ def training_autoencoders():
         df_tcga_renormed = df_tcga_renormed.set_index("sample")
         df_tcga_renormed = df_tcga_renormed.sort_index(axis=1, ascending=True)
         test_features = list(df_tcga_renormed.values)
+        test_samples = list(df_tcga_renormed.index)
 
-        return np.array(test_features)
+        return np.array(test_features), test_samples
 
     def train_autoencoder(train_features, test_features):
 
@@ -85,8 +87,8 @@ def training_autoencoders():
         df_metabric_renormed = pd.read_csv(ROOT_PATH + "/metabric/df_renormed.tsv", delimiter="\t")
         df_tcga_renormed = pd.read_csv(ROOT_PATH + "/tcga/df_renormed.tsv", delimiter="\t")
 
-        train_features = make_train_features(df_metabric_renormed)
-        test_features = make_test_features(df_tcga_renormed)
+        train_features, train_samples = make_train_features(df_metabric_renormed)
+        test_features, test_samples = make_test_features(df_tcga_renormed)
         autoencoder, encoder, hist = train_autoencoder(train_features, test_features)
         latent_features_metabric = make_latent_features_metabric(encoder, train_features)
         latent_features_tcga = make_latent_features_tcga(encoder, test_features)
@@ -106,6 +108,12 @@ def training_autoencoders():
 
         with open(ROOT_PATH + "/tcga/tcga_" + str(DIM) + ".pickle", "wb") as f:
             pickle.dump(latent_features_tcga, f)
+            
+        with open(ROOT_PATH + "/metabric/samples_list.pickle", "wb") as f:
+            pickle.dump(train_samples, f)
+
+        with open(ROOT_PATH + "/tcga/samples_list.pickle", "wb") as f:
+            pickle.dump(test_samples, f)
 
     main()
 
