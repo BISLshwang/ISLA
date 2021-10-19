@@ -36,8 +36,8 @@ def parsing_meta_data():
         tcga_meta_dict = {}
         for _, row in df_luma.iterrows():
             tcga_meta_dict[row["Patient ID"]] = {}
-            tcga_meta_dict[row["Patient ID"]]["DFS"] = row["Disease Free Status"]
-            tcga_meta_dict[row["Patient ID"]]["DFSM"] = row["Disease Free (Months)"]
+            tcga_meta_dict[row["Patient ID"]]["RFS"] = row["Disease Free Status"]
+            tcga_meta_dict[row["Patient ID"]]["RFM"] = row["Disease Free (Months)"]
 
         return tcga_meta_dict
 
