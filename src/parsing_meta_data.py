@@ -1,14 +1,8 @@
 import pickle
-import numpy as np
 import pandas as pd
-import math
-from sklearn.cluster import KMeans
-from lifelines import KaplanMeierFitter
-from lifelines.statistics import multivariate_logrank_test, pairwise_logrank_test
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-def clustering_and_survival_analysis():
+
+def parsing_meta_data():
 
     # Designate your path
     ROOT_PATH = '.'
@@ -64,4 +58,4 @@ def clustering_and_survival_analysis():
 
     main()
 
-clustering_and_survival_analysis()
+parsing_meta_data()
