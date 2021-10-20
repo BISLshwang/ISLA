@@ -1,10 +1,26 @@
 # Identifying prognostic subgroups of luminal-A breast cancer using deep autoencoders and gene expressions
-In this study, we discovered two prognostic subgroups of luminal-A breast cancer (BPS-LumA and WPS-LumA) using deep autoencoders and gene expressions. The deep autoencoders were trained using gene expression profiles of 679 luminal-A breast cancer samples in the METABRIC dataset. Then, latent features of each samples generated from the deep autoencoders were used for K-Means clustering to divide the samples into two subgroups, and Kaplan-Meier survival analysis was performed to compare prognosis (recurrence-free survival) between them. As a result, the prognostic difference between the subgroups was significantly different (p-value=1.23E-06; log-rank test). The prognostic difference between two subgroups were validated using gene expression profiles of 415 luminal-A breast cancer samples in the TCGA BRCA dataset (p-value=1.37E-04; log-rank test) Notably, only latent features were able to identify these prognostic subgroups compared to gene expression profiles. Our stratification method can be contributed to understanding a complexity of luminal-A breast cancer and providing a personalized medicine.
+In this study, we discovered two prognostic subgroups of luminal-A breast cancer (BPS-LumA and WPS-LumA) using deep autoencoders and gene expressions. The deep autoencoders were trained using gene expression profiles of 679 luminal-A breast cancer samples in the METABRIC dataset. Then, latent features of each samples generated from the deep autoencoders were used for K-Means clustering to divide the samples into two subgroups, and Kaplan-Meier survival analysis was performed to compare prognosis (recurrence-free survival) between them. As a result, the prognostic difference between the subgroups was significantly different (p-value=6.13E-04; log-rank test). The prognostic difference between two subgroups were validated using gene expression profiles of 415 luminal-A breast cancer samples in the TCGA BRCA dataset (p-value=1.37E-04; log-rank test) Notably, only latent features were able to identify these prognostic subgroups compared to gene expression profiles. Our stratification method can be contributed to understanding a complexity of luminal-A breast cancer and providing a personalized medicine.
 ## 1. Dataset
 #### 1) METABRIC (Pereira, Bernard, et al. "The somatic mutation profiles of 2,433 breast cancers refine their genomic and transcriptomic landscapes." Nature communications 7.1 (2016): 1-16.)
 #### 2) TCGA BRCA (Ciriello, Giovanni, et al. "Comprehensive molecular portraits of invasive lobular breast cancer." Cell 163.2 (2015): 506-519.)
 - All data (gene expression profiles (median Z-scores), recurrence free survival status and months, PAM50 subtype) are availble at original publications and cBioPortal (https://www.cbioportal.org/).
 
 ## 2. Source codes
+#### 1) renormalizing_datasets.py
+#### 2) parsing_meta_data.py
+#### 3) training_autoencoder.py
+#### 4) clustering_and_survival_analysis.py
+#### 5) comparing_with_expressions.py
+#### 6) comparing_with_other_stratifications.py
+#### 7) finding_pathways_with_degs.py
 
 ## 3. Python and library versions
+#### 1) python==3.7.1
+#### 2) numpy==0.21.2
+#### 3) pandas==1.3.3
+#### 4) tensorflow==2.3.0
+#### 5) scikit-learn==0.23.2
+#### 6) scipy==1.7.1
+#### 7) lifelines==0.24.1
+#### 8) gseapy==0.10.5
+
