@@ -107,13 +107,13 @@ def comparing_previous_works():
 
     def main():
 
-        with open(ROOT_PATH + "/common/metabric/metabric_" + str(DIM) + ".pickle", "rb") as f:
+        with open(ROOT_PATH + "/metabric/metabric_" + str(DIM) + ".pickle", "rb") as f:
             metabric_latent = pickle.load(f)
             
-        with open(ROOT_PATH + "/common/tcga/tcga_" + str(DIM) + ".pickle", "rb") as f:
+        with open(ROOT_PATH + "/tcga/tcga_" + str(DIM) + ".pickle", "rb") as f:
             tcga_latent = pickle.load(f)
 
-        with open(ROOT_PATH + "/common/tcga/samples_list.pickle", "rb") as f:
+        with open(ROOT_PATH + "/tcga/samples_list.pickle", "rb") as f:
             tcga_samples = pickle.load(f)
 
 
