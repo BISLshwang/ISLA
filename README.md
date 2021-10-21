@@ -6,21 +6,21 @@ In this study, we discovered two prognostic subgroups of luminal-A breast cancer
 - All data (gene expression profiles (median Z-scores), recurrence free survival status and months, PAM50 subtype) are availble at original publications and cBioPortal (https://www.cbioportal.org/).
 
 ## 2. Source codes
-- 1) renormalizing_datasets.py
-- 2) parsing_meta_data.py
-- 3) training_autoencoder.py
-- 4) clustering_and_survival_analysis.py
-- 5) comparing_with_expressions.py
-- 6) comparing_with_other_stratifications.py
-- 7) finding_pathways_with_degs.py
+- renormalizing_datasets.py
+- parsing_meta_data.py
+- training_autoencoder.py
+- clustering_and_survival_analysis.py
+- comparing_with_expressions.py
+- comparing_with_other_stratifications.py
+- finding_pathways_with_degs.py
 
 ## 3. Python and library versions
-- 1) python==3.7.1
-- 2) numpy==0.21.2
-- 3) pandas==1.3.3
-- 4) tensorflow==2.3.0
-- 5) scikit-learn==0.23.2
-- 6) scipy==1.7.1
-- 7) lifelines==0.24.1
-- 8) gseapy==0.10.5
+- python==3.7.1
+- numpy==0.21.2
+- pandas==1.3.3
+- tensorflow==2.3.0
+- scikit-learn==0.23.2
+- scipy==1.7.1
+- lifelines==0.24.1
+- gseapy==0.10.5
 
