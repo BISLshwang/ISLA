@@ -9,10 +9,27 @@ def training_autoencoders():
     # Designate your path
     ROOT_PATH = '.'
 
-    GENE_NUMBER = 17202
-    DIM = 2048
+    GENE_NUMBER = 5000
+    DIM = 64
+    
+    def select_variable_genes():
+        
+        # Function to select the top 5,000 genes with the highest variability genes
+        # Input: METABRIC luminal-A breast cancer normalized gene expressions (row: Entrez ID, columns: sample ID)
+        # Output: The list of top 5,000 genes with the highest variability genes
+        
+        df_luma_metabric = pd.read_csv(ROOT_PATH+"/metabric/df_luma.tsv", delimiter="\t")
+        df_luma_metabric = df_luma_metabric.transpose()
+        df_luma_metabric = df_luma_metabricy.sort_index(axis=1, ascending=False)
+        
+        mads = df_luma_metabric.mad()
+        mads = pd.DataFrame(mads, columns=['mad'])
+        mads = mads.sort_values(by=['mad'], ascending=False)
+        genes_sorted = mads.index.to_list()[0:5000]
+        
+        return genes_sorted
 
-    def make_train_features(df_metabric_renormed):
+    def make_train_features(df_metabric_renormed, genes_sorted):
 
         # Function to make training input features for deep autoencoders
         # Input:  METABRIC luminal-A breast cancer renormalized gene expressions (row: sample ID, columns: Entrez ID)
@@ -20,13 +37,14 @@ def training_autoencoders():
 
         df_metabric_renormed = df_metabric_renormed.set_index("sample")
         df_metabric_renormed = df_metabric_renormed.sort_index(axis=1, ascending=True)
+        df_metabric_renormed = df_metabric_renomred[genes_sorted]
         train_features = list(df_metabric_renormed.values)
         train_samples = list(df_metabric_renormed.index)
 
         return np.array(train_features), train_samples
 
 
-    def make_test_features(df_tcga_renormed):
+    def make_test_features(df_tcga_renormed, genes_sorted):
 
         # Function to make validation input features for deep autoencoders
         # Input:  TCGA luminal-A breast cancer renormalized gene expressions (row: sample ID, columns: Entrez ID)
@@ -34,6 +52,7 @@ def training_autoencoders():
 
         df_tcga_renormed = df_tcga_renormed.set_index("sample")
         df_tcga_renormed = df_tcga_renormed.sort_index(axis=1, ascending=True)
+        df_tcga_renormed = df_tcga_renormed[genes_sorted]
         test_features = list(df_tcga_renormed.values)
         test_samples = list(df_tcga_renormed.index)
 
@@ -87,8 +106,9 @@ def training_autoencoders():
         df_metabric_renormed = pd.read_csv(ROOT_PATH + "/metabric/df_renormed.tsv", delimiter="\t")
         df_tcga_renormed = pd.read_csv(ROOT_PATH + "/tcga/df_renormed.tsv", delimiter="\t")
 
-        train_features, train_samples = make_train_features(df_metabric_renormed)
-        test_features, test_samples = make_test_features(df_tcga_renormed)
+        genes_sorted = select_variable_genes()
+        train_features, train_samples = make_train_features(df_metabric_renormed, genes_sorted)
+        test_features, test_samples = make_test_features(df_tcga_renormed, genes_sorted)
         autoencoder, encoder, hist = train_autoencoder(train_features, test_features)
         latent_features_metabric = make_latent_features_metabric(encoder, train_features)
         latent_features_tcga = make_latent_features_tcga(encoder, test_features)
